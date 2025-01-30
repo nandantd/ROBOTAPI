@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.2 (Python 3.11.4 on win32)" generated="2025-01-30T11:25:00.394097" rpa="false" schemaversion="5">
+<suite id="s1" name="Test" source="C:\Users\User\PycharmProjects\API\Testcase\Test">
+<kw name="Get AccessToken" owner="Base" type="SETUP">
+<kw name="Send And Verify OTP" owner="Base">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-01-30T11:25:00.671071" level="INFO">Creating Session using : alias=kukufm, url=https://kukufm.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<arg>kukufm</arg>
+<arg>${BASE_URL}</arg>
+<arg>verify=True</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-01-30T11:25:00.669990" elapsed="0.001989"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-01-30T11:25:00.925614" level="INFO">POST Request : url=https://kukufm.com/api/v1/users/auth/send-otp/ 
+ path_url=/api/v1/users/auth/send-otp/ 
+ headers={'User-Agent': 'chrome', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '33'} 
+ body=b'{"phone_number": "+917777711323"}' 
+ </msg>
+<msg time="2025-01-30T11:25:00.925614" level="INFO">POST Response : url=https://kukufm.com/api/v1/users/auth/send-otp/ 
+ status=200, reason=OK 
+ headers={'Date': 'Thu, 30 Jan 2025 05:55:01 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Set-Cookie': 'AWSALBTG=fHdjweEVL9Q4rmpRug7Mm2DaljL6MVvd1UQgXXKa4OPfKX+m779vV9avCIkS+NHhyZfKEB21+Y6ZH3fEBASENvwv7mlzQ1/EilZScgidV6izghSefLutPWzYFdjCs2VwddTq1D2IdlI7aMjMiGieVEddcrnSn5zWITMgKw6+aUK7; Expires=Thu, 06 Feb 2025 05:55:01 GMT; Path=/, AWSALBTGCORS=fHdjweEVL9Q4rmpRug7Mm2DaljL6MVvd1UQgXXKa4OPfKX+m779vV9avCIkS+NHhyZfKEB21+Y6ZH3fEBASENvwv7mlzQ1/EilZScgidV6izghSefLutPWzYFdjCs2VwddTq1D2IdlI7aMjMiGieVEddcrnSn5zWITMgKw6+aUK7; Expires=Thu, 06 Feb 2025 05:55:01 GMT; Path=/; SameSite=None; Secure, AWSALB=TIFfj+oLuzVCDgT5+a8TnY+SR4dGuOZRVrpe9OFItDWGnPVwLw2c1Z71adQRr/gXZYrK5i5jFpbrFNfz5oqGJuWva9+6VA7SBG12XIImQrnnzcs+nvIQzBgNOSvF; Expires=Thu, 06 Feb 2025 05:55:01 GMT; Path=/, AWSALBCORS=TIFfj+oLuzVCDgT5+a8TnY+SR4dGuOZRVrpe9OFItDWGnPVwLw2c1Z71adQRr/gXZYrK5i5jFpbrFNfz5oqGJuWva9+6VA7SBG12XIImQrnnzcs+nvIQzBgNOSvF; Expires=Thu, 06 Feb 2025 05:55:01 GMT; Path=/; SameSite=None; Secure', 'Server': 'nginx/1.18.0 (Ubuntu)', 'Vary': 'Accept-Encoding, Cookie', 'X-Frame-Options': 'DENY', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'same-origin', 'Cross-Origin-Opener-Policy': 'same-origin', 'Content-Encoding': 'gzip'} 
+ body={"message": "OTP sent successfully", "phone_number": "+917777711323", "verification_id": 1738282249, "otp_length": 4} 
+ </msg>
+<msg time="2025-01-30T11:25:00.925614" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>kukufm</arg>
+<arg>url=${SENDOTPENDPOINT}</arg>
+<arg>json=${SEND_PAYLOAD}</arg>
+<arg>headers=${HEADERS}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-01-30T11:25:00.671979" elapsed="0.254631"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Response Status: ${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-01-30T11:25:00.926610" elapsed="0.000000"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Response Headers: ${response.headers}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-01-30T11:25:00.926610" elapsed="0.001058"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Response Body: ${response.content}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-01-30T11:25:00.927668" elapsed="0.000936"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-01-30T11:25:00.929600" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-01-30T11:25:00.928604" elapsed="0.000996"/>
+</kw>
+<kw name="Convert String To Json" owner="JSONLibrary">
+<msg time="2025-01-30T11:25:00.929600" level="INFO">${Json_response} = {'message': 'OTP sent successfully', 'phone_number': '+917777711323', 'verification_id': 1738282249, 'otp_length': 4}</msg>
+<var>${Json_response}</var>
+<arg>${response.content}</arg>
+<doc>Convert String to JSON object</doc>
+<status status="PASS" start="2025-01-30T11:25:00.929600" elapsed="0.000000"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-01-30T11:25:00.930597" level="INFO">${VerificationId} = 1738282249</msg>
+<var>${VerificationId}</var>
+<arg>${Json_response}</arg>
+<arg>verification_id</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-01-30T11:25:00.929600" elapsed="0.000997"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Verification ID: ${VerificationId}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-01-30T11:25:00.930597" elapsed="0.000000"/>
+</kw>
+<kw name="Verify OTP" owner="Base">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-01-30T11:25:00.931699" level="INFO">Creating Session using : alias=kukufm, url=https://kukufm.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<arg>kukufm</arg>
+<arg>${BASE_URL}</arg>
+<arg>verify=True</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-01-30T11:25:00.930597" elapsed="0.001102"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-01-30T11:25:00.931699" level="INFO">&amp;{verify_payload} = { phone_number=+917777711323 | otp=9999 | verification_id=1738282249 }</msg>
+<var>&amp;{verify_payload}</var>
+<arg>phone_number=${PHONENUMBER}</arg>
+<arg>otp=9999</arg>
+<arg>verification_id=${VerificationId}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-01-30T11:25:00.931699" elapsed="0.000000"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-01-30T11:25:01.416178" level="INFO">POST Request : url=https://kukufm.com/api/v1/users/auth/verify-otp/ 
+ path_url=/api/v1/users/auth/verify-otp/ 
+ headers={'User-Agent': 'chrome', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '79'} 
+ body=b'{"phone_number": "+917777711323", "otp": "9999", "verification_id": 1738282249}' 
+ </msg>
+<msg time="2025-01-30T11:25:01.416178" level="INFO">POST Response : url=https://kukufm.com/api/v1/users/auth/verify-otp/ 
+ status=200, reason=OK 
+ headers={'Date': 'Thu, 30 Jan 2025 05:55:01 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Set-Cookie': 'AWSALBTG=4p3l5glrQ8rb9fNmn44hsjYcRUNP7tq/ln5P3+txorpyNMbDLCW2MAal7Qv93DRWcmjuIQ+X0LgeKZaXkukl0/E4rS8z+Pz9BFHM3+a9cZBqWvNmgf6OytqTUkSqpEwj9ZsZ2kGxPxXM8LHkcXOa7ElZOKKVEBioh5YGwxaWL2Tk; Expires=Thu, 06 Feb 2025 05:55:01 GMT; Path=/, AWSALBTGCORS=4p3l5glrQ8rb9fNmn44hsjYcRUNP7tq/ln5P3+txorpyNMbDLCW2MAal7Qv93DRWcmjuIQ+X0LgeKZaXkukl0/E4rS8z+Pz9BFHM3+a9cZBqWvNmgf6OytqTUkSqpEwj9ZsZ2kGxPxXM8LHkcXOa7ElZOKKVEBioh5YGwxaWL2Tk; Expires=Thu, 06 Feb 2025 05:55:01 GMT; Path=/; SameSite=None; Secure, AWSALB=tGINDNW6du1RIoSHU8sDx/zdj8PF+sAP3YcWIHMCE848QMzuHFJSKO7Sn/h1pewXTSQwe/F2SDObdWOKl9GtEjkwnhW7DBD71ho8vJ5iHhJNKmOloVGKs2k+B5QU; Expires=Thu, 06 Feb 2025 05:55:01 GMT; Path=/, AWSALBCORS=tGINDNW6du1RIoSHU8sDx/zdj8PF+sAP3YcWIHMCE848QMzuHFJSKO7Sn/h1pewXTSQwe/F2SDObdWOKl9GtEjkwnhW7DBD71ho8vJ5iHhJNKmOloVGKs2k+B5QU; Expires=Thu, 06 Feb 2025 05:55:01 GMT; Path=/; SameSite=None; Secure', 'Server': 'nginx/1.18.0 (Ubuntu)', 'Vary': 'Accept-Encoding, Cookie', 'X-Frame-Options': 'DENY', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'same-origin', 'Cross-Origin-Opener-Policy': 'same-origin', 'Content-Encoding': 'gzip'} 
+ body={"message": "OTP verified successfully", "token": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMTQ5MTc0MDksImV4cCI6MTczOTQ3MTQwMH0.6TyTaiDHylBjJqcCAo9bpOOhXIXLu3pbY5L8JRC9uBsPwEC_OSy4RNlw9AGhrF2C_4RmXoaukABwUwmA_AulSg", "user": {"id": 114917409, "name": "Phenomenal_Fan128O", "email": "", "avatar": null, "uuid": "d0f94429e46c461c9910865ef43c708c", "has_premium": false, "username": "+917777711323", "phone": "+917777711323"}} 
+ </msg>
+<msg time="2025-01-30T11:25:01.417174" level="INFO">${verify_response} = &lt;Response [200]&gt;</msg>
+<var>${verify_response}</var>
+<arg>kukufm</arg>
+<arg>url=${VERIFYOTPENDPOINT}</arg>
+<arg>json=${verify_payload}</arg>
+<arg>headers=${HEADERS}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-01-30T11:25:00.931699" elapsed="0.485475"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Response Status: ${verify_response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-01-30T11:25:01.417174" elapsed="0.001918"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Response Body: ${verify_response.content}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-01-30T11:25:01.419092" elapsed="0.000993"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-01-30T11:25:01.420085" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${verify_response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-01-30T11:25:01.420085" elapsed="0.000000"/>
+</kw>
+<kw name="Convert String To Json" owner="JSONLibrary">
+<msg time="2025-01-30T11:25:01.421110" level="INFO">${verify_json_response} = {'message': 'OTP verified successfully', 'token': 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMTQ5MTc0MDksImV4cCI6MTczOTQ3MTQwMH0.6TyTaiDHylBjJqcCAo9bpOOhXIXLu3pbY5L8JRC9uBsPwEC_OSy4RNlw9AGh...</msg>
+<var>${verify_json_response}</var>
+<arg>${verify_response.content}</arg>
+<doc>Convert String to JSON object</doc>
+<status status="PASS" start="2025-01-30T11:25:01.420085" elapsed="0.001025"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-01-30T11:25:01.421110" level="INFO">${access_token} = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMTQ5MTc0MDksImV4cCI6MTczOTQ3MTQwMH0.6TyTaiDHylBjJqcCAo9bpOOhXIXLu3pbY5L8JRC9uBsPwEC_OSy4RNlw9AGhrF2C_4RmXoaukABwUwmA_AulSg</msg>
+<var>${access_token}</var>
+<arg>${verify_json_response}</arg>
+<arg>token</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-01-30T11:25:01.421110" elapsed="0.000000"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>"Access token extracted: ${access_token}"</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-01-30T11:25:01.421110" elapsed="0.000000"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<msg time="2025-01-30T11:25:01.422078" level="INFO">${ACCESS_TOKEN} = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMTQ5MTc0MDksImV4cCI6MTczOTQ3MTQwMH0.6TyTaiDHylBjJqcCAo9bpOOhXIXLu3pbY5L8JRC9uBsPwEC_OSy4RNlw9AGhrF2C_4RmXoaukABwUwmA_AulSg</msg>
+<arg>${ACCESS_TOKEN}</arg>
+<arg>${access_token}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="PASS" start="2025-01-30T11:25:01.422078" elapsed="0.000000"/>
+</kw>
+<arg>${VerificationId}</arg>
+<status status="PASS" start="2025-01-30T11:25:00.930597" elapsed="0.491481"/>
+</kw>
+<doc>Sends OTP and verifies it using the API, then stores the access token globally</doc>
+<status status="PASS" start="2025-01-30T11:25:00.669990" elapsed="0.752088"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<msg time="2025-01-30T11:25:01.422078" level="INFO">${Authorization} = jwt eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMTQ5MTc0MDksImV4cCI6MTczOTQ3MTQwMH0.6TyTaiDHylBjJqcCAo9bpOOhXIXLu3pbY5L8JRC9uBsPwEC_OSy4RNlw9AGhrF2C_4RmXoaukABwUwmA_AulSg</msg>
+<arg>${Authorization}</arg>
+<arg>jwt ${ACCESS_TOKEN}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="PASS" start="2025-01-30T11:25:01.422078" elapsed="0.000000"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Authorization Token: ${Authorization}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-01-30T11:25:01.422078" elapsed="0.000000"/>
+</kw>
+<doc>Logs the Access Token from the previous file</doc>
+<status status="PASS" start="2025-01-30T11:25:00.669092" elapsed="0.754069"/>
+</kw>
+<suite id="s1-s1" name="UpdateLanguageForHindi" source="C:\Users\User\PycharmProjects\API\Testcase\Test\UpdateLanguageForHindi.robot">
+<test id="s1-s1-t1" name=" [Tags]" line="11">
+<kw name="smoke">
+<msg time="2025-01-30T11:25:01.433052" level="FAIL">No keyword with name 'smoke' found.</msg>
+<status status="FAIL" start="2025-01-30T11:25:01.433052" elapsed="0.000000">No keyword with name 'smoke' found.</status>
+</kw>
+<status status="FAIL" start="2025-01-30T11:25:01.431059" elapsed="0.001993">No keyword with name 'smoke' found.</status>
+</test>
+<test id="s1-s1-t2" name="Update Language" line="12">
+<kw name="Send API Request To Update Languages" owner="Base">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-01-30T11:25:01.434040" level="INFO">Creating Session using : alias=kukufm, url=https://kukufm.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>kukufm</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-01-30T11:25:01.434040" elapsed="0.000000"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-01-30T11:25:01.435047" level="INFO">${headers} = {'Authorization': 'jwt eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMTQ5MTc0MDksImV4cCI6MTczOTQ3MTQwMH0.6TyTaiDHylBjJqcCAo9bpOOhXIXLu3pbY5L8JRC9uBsPwEC_OSy4RNlw9AGhrF2C_4RmXoaukABwUwmA_AulSg',...</msg>
+<var>${headers}</var>
+<arg>Authorization=${Authorization}</arg>
+<arg>package-name=${PACKAGE_NAME}</arg>
+<arg>Content-Type=application/x-www-form-urlencoded</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-01-30T11:25:01.434040" elapsed="0.001007"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-01-30T11:25:01.435047" level="INFO">${data} = {'language_ids': '{1'}</msg>
+<var>${data}</var>
+<arg>language_ids=${HINDI_LANGUAGE_ID}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-01-30T11:25:01.435047" elapsed="0.000000"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-01-30T11:25:01.891296" level="INFO">POST Request : url=https://kukufm.com/api/v1/users/114691457/languages/ 
+ path_url=/api/v1/users/114691457/languages/ 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'jwt eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMTQ5MTc0MDksImV4cCI6MTczOTQ3MTQwMH0.6TyTaiDHylBjJqcCAo9bpOOhXIXLu3pbY5L8JRC9uBsPwEC_OSy4RNlw9AGhrF2C_4RmXoaukABwUwmA_AulSg', 'package-name': 'com.vlv.aravali', 'Content-Type': 'application/x-www-form-urlencoded', 'Content-Length': '17'} 
+ body=language_ids=%7B1 
+ </msg>
+<msg time="2025-01-30T11:25:01.891296" level="INFO">POST Response : url=https://kukufm.com/api/v1/users/114691457/languages/ 
+ status=500, reason=Internal Server Error 
+ headers={'Date': 'Thu, 30 Jan 2025 05:55:02 GMT', 'Content-Type': 'text/html; charset=utf-8', 'Content-Length': '145', 'Connection': 'keep-alive', 'Set-Cookie': 'AWSALBTG=+O3VSUKodiy0U+vLEyhyBpG9ODeXKEYmr2n02gMQ7ThL2uK+VSKtNrHHyDQGF4cza4iPheI6oKNg5BP3TGIsLzKtmlJbFSGz2NrlCCDbzqr83P/1mKPq/9sL+QtovgyQOCIWQ/E54/sj59mdIhSaHxh/mss7tBz8dLdy7DVZ4GQY; Expires=Thu, 06 Feb 2025 05:55:02 GMT; Path=/, AWSALBTGCORS=+O3VSUKodiy0U+vLEyhyBpG9ODeXKEYmr2n02gMQ7ThL2uK+VSKtNrHHyDQGF4cza4iPheI6oKNg5BP3TGIsLzKtmlJbFSGz2NrlCCDbzqr83P/1mKPq/9sL+QtovgyQOCIWQ/E54/sj59mdIhSaHxh/mss7tBz8dLdy7DVZ4GQY; Expires=Thu, 06 Feb 2025 05:55:02 GMT; Path=/; SameSite=None; Secure, AWSALB=cQ+3+kHGP53Vo9S4+CeET9S8RMylG0mNfpsO0HEZEUYTzHpbN4BXYuW7x7+610eehrl+AmzvIv4865om/CEGju73typhLm0PuNic6uiQMOYFsyjxJWRA4UKwZGlX; Expires=Thu, 06 Feb 2025 05:55:02 GMT; Path=/, AWSALBCORS=cQ+3+kHGP53Vo9S4+CeET9S8RMylG0mNfpsO0HEZEUYTzHpbN4BXYuW7x7+610eehrl+AmzvIv4865om/CEGju73typhLm0PuNic6uiQMOYFsyjxJWRA4UKwZGlX; Expires=Thu, 06 Feb 2025 05:55:02 GMT; Path=/; SameSite=None; Secure', 'Server': 'nginx/1.18.0 (Ubuntu)', 'X-Frame-Options': 'DENY', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'same-origin', 'Cross-Origin-Opener-Policy': 'same-origin'} 
+ body=
+&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;title&gt;Server Error (500)&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Server Error (500)&lt;/h1&gt;&lt;p&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+ 
+ </msg>
+<msg time="2025-01-30T11:25:01.892294" level="INFO">C:\Python311\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'kukufm.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-01-30T11:25:01.892294" level="FAIL">HTTPError: 500 Server Error: Internal Server Error for url: https://kukufm.com/api/v1/users/114691457/languages/</msg>
+<var>${response}</var>
+<arg>kukufm</arg>
+<arg>url=${CheckForLanguage}</arg>
+<arg>headers=${headers}</arg>
+<arg>data=${data}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="FAIL" start="2025-01-30T11:25:01.435047" elapsed="0.499018">HTTPError: 500 Server Error: Internal Server Error for url: https://kukufm.com/api/v1/users/114691457/languages/</status>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Response Status: ${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-01-30T11:25:01.934065" elapsed="0.000000"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Response Body: ${response.content}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-01-30T11:25:01.934065" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-01-30T11:25:01.934065" elapsed="0.000000"/>
+</kw>
+<arg>{${HINDI_LANGUAGE_ID}</arg>
+<doc>Sends a POST request to the API with necessary headers and data</doc>
+<status status="FAIL" start="2025-01-30T11:25:01.434040" elapsed="0.500025">HTTPError: 500 Server Error: Internal Server Error for url: https://kukufm.com/api/v1/users/114691457/languages/</status>
+</kw>
+<status status="FAIL" start="2025-01-30T11:25:01.433052" elapsed="0.502018">HTTPError: 500 Server Error: Internal Server Error for url: https://kukufm.com/api/v1/users/114691457/languages/</status>
+</test>
+<status status="FAIL" start="2025-01-30T11:25:01.423161" elapsed="0.511909"/>
+</suite>
+<status status="FAIL" start="2025-01-30T11:25:00.397109" elapsed="1.538946"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="2" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Test" id="s1" pass="0" fail="2" skip="0">Test</stat>
+<stat name="UpdateLanguageForHindi" id="s1-s1" pass="0" fail="2" skip="0">Test.UpdateLanguageForHindi</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

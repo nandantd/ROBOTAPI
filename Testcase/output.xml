@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.2 (Python 3.12.7 on win32)" generated="2025-01-30T11:04:00.583978" rpa="false" schemaversion="5">
+<suite id="s1" name="Test" source="C:\Users\User\PycharmProjects\API\Testcase\Test">
+<kw name="Get AccessToken" owner="Base" type="SETUP">
+<kw name="Send And Verify OTP" owner="Base">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-01-30T11:04:01.262377" level="INFO">Creating Session using : alias=kukufm, url=https://kukufm.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<arg>kukufm</arg>
+<arg>${BASE_URL}</arg>
+<arg>verify=True</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-01-30T11:04:01.262377" elapsed="0.000000"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-01-30T11:04:01.497894" level="INFO">POST Request : url=https://kukufm.com/api/v1/users/auth/send-otp/ 
+ path_url=/api/v1/users/auth/send-otp/ 
+ headers={'User-Agent': 'chrome', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '33'} 
+ body=b'{"phone_number": "+917777711323"}' 
+ </msg>
+<msg time="2025-01-30T11:04:01.497894" level="INFO">POST Response : url=https://kukufm.com/api/v1/users/auth/send-otp/ 
+ status=200, reason=OK 
+ headers={'Date': 'Thu, 30 Jan 2025 05:34:01 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Set-Cookie': 'AWSALBTG=aQbUKZNUo9McCm3oD1mVLGYDRLdMMdB+1cciYEOj9+9D71m3ijmGy41XKYMwYDhY6ZeHDdnT5uHpMB5UuBl1jC9ZZEC9cXJJUd/MRpDaoK3+9InHYUaByGj8BqQka/cEVwMTuho7uu5ggJh2x0w8TSdfMjpWP6H11OoPVerxPtw0; Expires=Thu, 06 Feb 2025 05:34:01 GMT; Path=/, AWSALBTGCORS=aQbUKZNUo9McCm3oD1mVLGYDRLdMMdB+1cciYEOj9+9D71m3ijmGy41XKYMwYDhY6ZeHDdnT5uHpMB5UuBl1jC9ZZEC9cXJJUd/MRpDaoK3+9InHYUaByGj8BqQka/cEVwMTuho7uu5ggJh2x0w8TSdfMjpWP6H11OoPVerxPtw0; Expires=Thu, 06 Feb 2025 05:34:01 GMT; Path=/; SameSite=None; Secure, AWSALB=TPnLyYANdXYylfrlMFctmsAHglc270RVhJAlWAWmKr3uAzJxjQLFIJzZyNZHCmSeReDHkvbzWydm4QflTNtiW0dQuJzSw9PfTHPhvLSNQcyydkhFAuouPjmwN/Fo; Expires=Thu, 06 Feb 2025 05:34:01 GMT; Path=/, AWSALBCORS=TPnLyYANdXYylfrlMFctmsAHglc270RVhJAlWAWmKr3uAzJxjQLFIJzZyNZHCmSeReDHkvbzWydm4QflTNtiW0dQuJzSw9PfTHPhvLSNQcyydkhFAuouPjmwN/Fo; Expires=Thu, 06 Feb 2025 05:34:01 GMT; Path=/; SameSite=None; Secure', 'Server': 'nginx/1.18.0 (Ubuntu)', 'Vary': 'Accept-Encoding, Cookie', 'X-Frame-Options': 'DENY', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'same-origin', 'Cross-Origin-Opener-Policy': 'same-origin', 'Content-Encoding': 'gzip'} 
+ body={"message": "OTP sent successfully", "phone_number": "+917777711323", "verification_id": 1738279966, "otp_length": 4} 
+ </msg>
+<msg time="2025-01-30T11:04:01.497894" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>kukufm</arg>
+<arg>url=${SENDOTPENDPOINT}</arg>
+<arg>json=${SEND_PAYLOAD}</arg>
+<arg>headers=${HEADERS}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-01-30T11:04:01.262377" elapsed="0.235517"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Response Status: ${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-01-30T11:04:01.497894" elapsed="0.000000"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Response Headers: ${response.headers}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-01-30T11:04:01.497894" elapsed="0.000000"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Response Body: ${response.content}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-01-30T11:04:01.497894" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-01-30T11:04:01.497894" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-01-30T11:04:01.497894" elapsed="0.000000"/>
+</kw>
+<kw name="Convert String To Json" owner="JSONLibrary">
+<msg time="2025-01-30T11:04:01.497894" level="INFO">${Json_response} = {'message': 'OTP sent successfully', 'phone_number': '+917777711323', 'verification_id': 1738279966, 'otp_length': 4}</msg>
+<var>${Json_response}</var>
+<arg>${response.content}</arg>
+<doc>Convert String to JSON object</doc>
+<status status="PASS" start="2025-01-30T11:04:01.497894" elapsed="0.000000"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-01-30T11:04:01.497894" level="INFO">${VerificationId} = 1738279966</msg>
+<var>${VerificationId}</var>
+<arg>${Json_response}</arg>
+<arg>verification_id</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-01-30T11:04:01.497894" elapsed="0.000000"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Verification ID: ${VerificationId}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-01-30T11:04:01.497894" elapsed="0.000000"/>
+</kw>
+<kw name="Verify OTP" owner="Base">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-01-30T11:04:01.497894" level="INFO">Creating Session using : alias=kukufm, url=https://kukufm.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<arg>kukufm</arg>
+<arg>${BASE_URL}</arg>
+<arg>verify=True</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-01-30T11:04:01.497894" elapsed="0.000000"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-01-30T11:04:01.497894" level="INFO">&amp;{verify_payload} = { phone_number=+917777711323 | otp=9999 | verification_id=1738279966 }</msg>
+<var>&amp;{verify_payload}</var>
+<arg>phone_number=${PHONENUMBER}</arg>
+<arg>otp=9999</arg>
+<arg>verification_id=${VerificationId}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-01-30T11:04:01.497894" elapsed="0.000000"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-01-30T11:04:02.488014" level="INFO">POST Request : url=https://kukufm.com/api/v1/users/auth/verify-otp/ 
+ path_url=/api/v1/users/auth/verify-otp/ 
+ headers={'User-Agent': 'chrome', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '79'} 
+ body=b'{"phone_number": "+917777711323", "otp": "9999", "verification_id": 1738279966}' 
+ </msg>
+<msg time="2025-01-30T11:04:02.488014" level="INFO">POST Response : url=https://kukufm.com/api/v1/users/auth/verify-otp/ 
+ status=200, reason=OK 
+ headers={'Date': 'Thu, 30 Jan 2025 05:34:02 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Set-Cookie': 'AWSALBTG=dC1ixwaTND28GRljz+pvCEMpwxea5QBgIsEJ0HyDzJDtuk1AsIegaWjGeLjibSofncpS3ZFyDlUpAN8FLftHj5BOIX87ffQio43RdxKH7LwnQjvAK2vbuSR/+tTiys4U4phu+dFJ+KBvoGM/Q8ee1653v6+5YyPguZFrl5f+XBCW; Expires=Thu, 06 Feb 2025 05:34:02 GMT; Path=/, AWSALBTGCORS=dC1ixwaTND28GRljz+pvCEMpwxea5QBgIsEJ0HyDzJDtuk1AsIegaWjGeLjibSofncpS3ZFyDlUpAN8FLftHj5BOIX87ffQio43RdxKH7LwnQjvAK2vbuSR/+tTiys4U4phu+dFJ+KBvoGM/Q8ee1653v6+5YyPguZFrl5f+XBCW; Expires=Thu, 06 Feb 2025 05:34:02 GMT; Path=/; SameSite=None; Secure, AWSALB=6Jkhqp9eITsLKLTsNwYUd1LiofqHSpu5gdWzSWDO3HgpLzgnx2CMxdmVkab+JNrzFJlrX694tdXPfOSMKkpTS8Hy65JFYllA7X/ZjR5Mf1oFz/dluqwuLeHdJv4H; Expires=Thu, 06 Feb 2025 05:34:02 GMT; Path=/, AWSALBCORS=6Jkhqp9eITsLKLTsNwYUd1LiofqHSpu5gdWzSWDO3HgpLzgnx2CMxdmVkab+JNrzFJlrX694tdXPfOSMKkpTS8Hy65JFYllA7X/ZjR5Mf1oFz/dluqwuLeHdJv4H; Expires=Thu, 06 Feb 2025 05:34:02 GMT; Path=/; SameSite=None; Secure', 'Server': 'nginx/1.18.0 (Ubuntu)', 'Vary': 'Accept-Encoding, Cookie', 'X-Frame-Options': 'DENY', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'same-origin', 'Cross-Origin-Opener-Policy': 'same-origin', 'Content-Encoding': 'gzip'} 
+ body={"message": "OTP verified successfully", "token": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMTQ5MTQxMzAsImV4cCI6MTczOTQ3MTQwMH0._cfHZqPo2mkvSrjensmEgzvlvjAYfK-8sXv1AHRcs_VE5EVqxefGRPIAOqwtkW3XvVzD8ZJENglNu92BcNPxQw", "user": {"id": 114914130, "name": "Enchanted_Adventurer63e", "email": "", "avatar": null, "uuid": "17e03966a0f648a8a3da6c3dda4d8aaf", "has_premium": false, "username": "+917777711323", "phone": "+917777711323"}} 
+ </msg>
+<msg time="2025-01-30T11:04:02.488014" level="INFO">${verify_response} = &lt;Response [200]&gt;</msg>
+<var>${verify_response}</var>
+<arg>kukufm</arg>
+<arg>url=${VERIFYOTPENDPOINT}</arg>
+<arg>json=${verify_payload}</arg>
+<arg>headers=${HEADERS}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-01-30T11:04:01.497894" elapsed="0.990120"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Response Status: ${verify_response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-01-30T11:04:02.488014" elapsed="0.000000"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Response Body: ${verify_response.content}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-01-30T11:04:02.488014" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-01-30T11:04:02.488014" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${verify_response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-01-30T11:04:02.488014" elapsed="0.000000"/>
+</kw>
+<kw name="Convert String To Json" owner="JSONLibrary">
+<msg time="2025-01-30T11:04:02.488014" level="INFO">${verify_json_response} = {'message': 'OTP verified successfully', 'token': 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMTQ5MTQxMzAsImV4cCI6MTczOTQ3MTQwMH0._cfHZqPo2mkvSrjensmEgzvlvjAYfK-8sXv1AHRcs_VE5EVqxefGRPIAOqwt...</msg>
+<var>${verify_json_response}</var>
+<arg>${verify_response.content}</arg>
+<doc>Convert String to JSON object</doc>
+<status status="PASS" start="2025-01-30T11:04:02.488014" elapsed="0.000000"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-01-30T11:04:02.488014" level="INFO">${access_token} = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMTQ5MTQxMzAsImV4cCI6MTczOTQ3MTQwMH0._cfHZqPo2mkvSrjensmEgzvlvjAYfK-8sXv1AHRcs_VE5EVqxefGRPIAOqwtkW3XvVzD8ZJENglNu92BcNPxQw</msg>
+<var>${access_token}</var>
+<arg>${verify_json_response}</arg>
+<arg>token</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-01-30T11:04:02.488014" elapsed="0.000000"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>"Access token extracted: ${access_token}"</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-01-30T11:04:02.488014" elapsed="0.000000"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<msg time="2025-01-30T11:04:02.488014" level="INFO">${ACCESS_TOKEN} = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMTQ5MTQxMzAsImV4cCI6MTczOTQ3MTQwMH0._cfHZqPo2mkvSrjensmEgzvlvjAYfK-8sXv1AHRcs_VE5EVqxefGRPIAOqwtkW3XvVzD8ZJENglNu92BcNPxQw</msg>
+<arg>${ACCESS_TOKEN}</arg>
+<arg>${access_token}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="PASS" start="2025-01-30T11:04:02.488014" elapsed="0.000000"/>
+</kw>
+<arg>${VerificationId}</arg>
+<status status="PASS" start="2025-01-30T11:04:01.497894" elapsed="0.990120"/>
+</kw>
+<doc>Sends OTP and verifies it using the API, then stores the access token globally</doc>
+<status status="PASS" start="2025-01-30T11:04:01.262377" elapsed="1.225637"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<msg time="2025-01-30T11:04:02.488014" level="INFO">${Authorization} = jwt eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMTQ5MTQxMzAsImV4cCI6MTczOTQ3MTQwMH0._cfHZqPo2mkvSrjensmEgzvlvjAYfK-8sXv1AHRcs_VE5EVqxefGRPIAOqwtkW3XvVzD8ZJENglNu92BcNPxQw</msg>
+<arg>${Authorization}</arg>
+<arg>jwt ${ACCESS_TOKEN}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="PASS" start="2025-01-30T11:04:02.488014" elapsed="0.000000"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Authorization Token: ${Authorization}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-01-30T11:04:02.488014" elapsed="0.015531"/>
+</kw>
+<doc>Logs the Access Token from the previous file</doc>
+<status status="PASS" start="2025-01-30T11:04:01.246674" elapsed="1.256871"/>
+</kw>
+<suite id="s1-s1" name="UpdateLanguageForHindi" source="C:\Users\User\PycharmProjects\API\Testcase\Test\UpdateLanguageForHindi.robot">
+<test id="s1-s1-t1" name="Send API Request To Get Languages" line="11">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-01-30T11:04:02.503545" level="INFO">Creating Session using : alias=kukufm, url=https://kukufm.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>kukufm</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-01-30T11:04:02.503545" elapsed="0.000000"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-01-30T11:04:02.503545" level="INFO">${headers} = {'Authorization': 'jwt eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMTQ5MTQxMzAsImV4cCI6MTczOTQ3MTQwMH0._cfHZqPo2mkvSrjensmEgzvlvjAYfK-8sXv1AHRcs_VE5EVqxefGRPIAOqwtkW3XvVzD8ZJENglNu92BcNPxQw',...</msg>
+<var>${headers}</var>
+<arg>Authorization=${Authorization}</arg>
+<arg>package-name=${PACKAGE_NAME}</arg>
+<arg>Content-Type=application/x-www-form-urlencoded</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-01-30T11:04:02.503545" elapsed="0.000000"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-01-30T11:04:02.503545" level="INFO">${data} = {'language_ids': '1'}</msg>
+<var>${data}</var>
+<arg>language_ids=${HINDI_LANGUAGE_ID}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-01-30T11:04:02.503545" elapsed="0.000000"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-01-30T11:04:02.754777" level="INFO">POST Request : url=https://kukufm.com/api/v1/users/114691457/languages/ 
+ path_url=/api/v1/users/114691457/languages/ 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'jwt eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMTQ5MTQxMzAsImV4cCI6MTczOTQ3MTQwMH0._cfHZqPo2mkvSrjensmEgzvlvjAYfK-8sXv1AHRcs_VE5EVqxefGRPIAOqwtkW3XvVzD8ZJENglNu92BcNPxQw', 'package-name': 'com.vlv.aravali', 'Content-Type': 'application/x-www-form-urlencoded', 'Content-Length': '14'} 
+ body=language_ids=1 
+ </msg>
+<msg time="2025-01-30T11:04:02.754777" level="INFO">POST Response : url=https://kukufm.com/api/v1/users/114691457/languages/ 
+ status=200, reason=OK 
+ headers={'Date': 'Thu, 30 Jan 2025 05:34:03 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Set-Cookie': 'AWSALBTG=ML2VDaqsvQP+PnfYCmK8B+7tXb+kz1xwcLbs8tqx8PVezV9RlJtuFBPqaKpHeab+B/FA0+besWLj9gowFQAUclD1lRtO0gPL9PHzrl/qL1R899adS1r3R4md1gDygT9dXFWqFuEwFt2zncVU1JzQvh8Gx1YRLPzkMl5b7gBuLiHI; Expires=Thu, 06 Feb 2025 05:34:03 GMT; Path=/, AWSALBTGCORS=ML2VDaqsvQP+PnfYCmK8B+7tXb+kz1xwcLbs8tqx8PVezV9RlJtuFBPqaKpHeab+B/FA0+besWLj9gowFQAUclD1lRtO0gPL9PHzrl/qL1R899adS1r3R4md1gDygT9dXFWqFuEwFt2zncVU1JzQvh8Gx1YRLPzkMl5b7gBuLiHI; Expires=Thu, 06 Feb 2025 05:34:03 GMT; Path=/; SameSite=None; Secure, AWSALB=i4Zb1yUkEK2fkvWlotbF/T2MWfDcZ6b7a5hQ89J8IA6oQp8aqY8XN7q5TfFrFh/wf8bF3YKdxnLwVrMFaRWnriQcjskuKYI64eSC0RwsU9kPgVT/KVEw40cXAfV7; Expires=Thu, 06 Feb 2025 05:34:03 GMT; Path=/, AWSALBCORS=i4Zb1yUkEK2fkvWlotbF/T2MWfDcZ6b7a5hQ89J8IA6oQp8aqY8XN7q5TfFrFh/wf8bF3YKdxnLwVrMFaRWnriQcjskuKYI64eSC0RwsU9kPgVT/KVEw40cXAfV7; Expires=Thu, 06 Feb 2025 05:34:03 GMT; Path=/; SameSite=None; Secure', 'Server': 'nginx/1.18.0 (Ubuntu)', 'Vary': 'Accept-Encoding', 'X-Frame-Options': 'DENY', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'same-origin', 'Cross-Origin-Opener-Policy': 'same-origin', 'Content-Encoding': 'gzip'} 
+ body={"show_genre_selection_screen": false, "show_genre_selection_screen_v2": false, "languages": [{"id": 1, "title": "\u0939\u093f\u0902\u0926\u0940", "title_secondary": "Hindi", "image": "https://images.cdn.kukufm.com/https://kukufm.s3.ap-south-1.amazonaws.com/icons/hindi_1.png", "slug": "hindi", "color": "#FD6233", "uri": "app://kukufm/home-lang/hindi", "web_uri": "/home-lang/hindi", "color_info": {"bg_color": "#F8EBD0", "text_color": "#A16400"}, "short_title": "\u0939", "svg_icon": "https://d1l07mcd18xic4.cloudfront.net/lang_icons/hindi.svg", "icon_sizes": {"16": "https://images.cdn.kukufm.com/w:16/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/hindi_1.png", "32": "https://images.cdn.kukufm.com/w:32/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/hindi_1.png", "64": "https://images.cdn.kukufm.com/w:64/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/hindi_1.png", "128": "https://images.cdn.kukufm.com/w:128/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/hindi_1.png", "256": "https://images.cdn.kukufm.com/w:256/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/hindi_1.png"}, "is_selected": true}, {"id": 8, "title": "\u0ba4\u0bae\u0bbf\u0bb4\u0bcd", "title_secondary": "Tamil", "image": "https://images.cdn.kukufm.com/https://kukufm.s3.ap-south-1.amazonaws.com/icons/tamil_2.png", "slug": "tamil", "color": "#282E34", "uri": "app://kukufm/home-lang/tamil", "web_uri": "/home-lang/tamil", "color_info": {"bg_color": "#EBCEF5", "text_color": "#671584"}, "short_title": "\u0ba4", "svg_icon": "https://d1l07mcd18xic4.cloudfront.net/lang_icons/tamil.svg", "icon_sizes": {"16": "https://images.cdn.kukufm.com/w:16/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/tamil_2.png", "32": "https://images.cdn.kukufm.com/w:32/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/tamil_2.png", "64": "https://images.cdn.kukufm.com/w:64/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/tamil_2.png", "128": "https://images.cdn.kukufm.com/w:128/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/tamil_2.png", "256": "https://images.cdn.kukufm.com/w:256/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/tamil_2.png"}, "is_selected": false}, {"id": 4, "title": "\u092e\u0930\u093e\u0920\u0940", "title_secondary": "Marathi", "image": "https://images.cdn.kukufm.com/https://kukufm.s3.ap-south-1.amazonaws.com/icons/marathi_1.png", "slug": "marathi", "color": "#349DD5", "uri": "app://kukufm/home-lang/marathi", "web_uri": "/home-lang/marathi", "color_info": {"bg_color": "#BAF0E4", "text_color": "#007A49"}, "short_title": "\u092e", "svg_icon": "https://d1l07mcd18xic4.cloudfront.net/lang_icons/marathi.svg", "icon_sizes": {"16": "https://images.cdn.kukufm.com/w:16/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/marathi_1.png", "32": "https://images.cdn.kukufm.com/w:32/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/marathi_1.png", "64": "https://images.cdn.kukufm.com/w:64/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/marathi_1.png", "128": "https://images.cdn.kukufm.com/w:128/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/marathi_1.png", "256": "https://images.cdn.kukufm.com/w:256/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/marathi_1.png"}, "is_selected": false}, {"id": 5, "title": "\u09ac\u09be\u0982\u09b2\u09be", "title_secondary": "Bangla", "image": "https://images.cdn.kukufm.com/https://kukufm.s3.ap-south-1.amazonaws.com/icons/bangla_1.png", "slug": "bengali", "color": "#4F55C8", "uri": "app://kukufm/home-lang/bengali", "web_uri": "/home-lang/bengali", "color_info": {"bg_color": "#F3C5F7", "text_color": "#8A00BE"}, "short_title": "\u09ac\u09be", "svg_icon": "https://d1l07mcd18xic4.cloudfront.net/lang_icons/bengali.svg", "icon_sizes": {"16": "https://images.cdn.kukufm.com/w:16/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/bangla_1.png", "32": "https://images.cdn.kukufm.com/w:32/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/bangla_1.png", "64": "https://images.cdn.kukufm.com/w:64/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/bangla_1.png", "128": "https://images.cdn.kukufm.com/w:128/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/bangla_1.png", "256": "https://images.cdn.kukufm.com/w:256/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/bangla_1.png"}, "is_selected": false}, {"id": 3, "title": "\u0c24\u0c46\u0c32\u0c41\u0c17\u0c41", "title_secondary": "Telugu", "image": "https://images.cdn.kukufm.com/https://kukufm.s3.ap-south-1.amazonaws.com/icons/telugu_1.png", "slug": "telugu", "color": "#0089B5", "uri": "app://kukufm/home-lang/telugu", "web_uri": "/home-lang/telugu", "color_info": {"bg_color": "#DCF7BD", "text_color": "#0350AA"}, "short_title": "\u0c24", "svg_icon": "https://d1l07mcd18xic4.cloudfront.net/lang_icons/telugu.svg", "icon_sizes": {"16": "https://images.cdn.kukufm.com/w:16/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/telugu_1.png", "32": "https://images.cdn.kukufm.com/w:32/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/telugu_1.png", "64": "https://images.cdn.kukufm.com/w:64/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/telugu_1.png", "128": "https://images.cdn.kukufm.com/w:128/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/telugu_1.png", "256": "https://images.cdn.kukufm.com/w:256/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/telugu_1.png"}, "is_selected": false}, {"id": 13, "title": "\u0c95\u0ca8\u0ccd\u0ca8\u0ca1", "title_secondary": "Kannada", "image": "https://images.cdn.kukufm.com/https://kukufm.s3.ap-south-1.amazonaws.com/icons/kannada_1.png", "slug": "kannada", "color": null, "uri": "app://kukufm/home-lang/kannada", "web_uri": "/home-lang/kannada", "color_info": {"bg_color": "#F9F2E1", "text_color": "#A2890B"}, "short_title": "\u0c95", "svg_icon": "https://d1l07mcd18xic4.cloudfront.net/lang_icons/kannada.svg", "icon_sizes": {"16": "https://images.cdn.kukufm.com/w:16/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/kannada_1.png", "32": "https://images.cdn.kukufm.com/w:32/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/kannada_1.png", "64": "https://images.cdn.kukufm.com/w:64/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/kannada_1.png", "128": "https://images.cdn.kukufm.com/w:128/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/kannada_1.png", "256": "https://images.cdn.kukufm.com/w:256/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/kannada_1.png"}, "is_selected": false}, {"id": 9, "title": "\u0d2e\u0d32\u0d2f\u0d3e\u0d33\u0d02", "title_secondary": "Malayalam", "image": "https://images.cdn.kukufm.com/https://kukufm.s3.ap-south-1.amazonaws.com/icons/malayalam_1.png", "slug": "malayalam", "color": "#282E34", "uri": "app://kukufm/home-lang/malayalam", "web_uri": "/home-lang/malayalam", "color_info": {"bg_color": "#D4D5E3", "text_color": "#3239D5"}, "short_title": "\u0d33", "svg_icon": "https://d1l07mcd18xic4.cloudfront.net/lang_icons/malayalam.svg", "icon_sizes": {"16": "https://images.cdn.kukufm.com/w:16/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/malayalam_1.png", "32": "https://images.cdn.kukufm.com/w:32/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/malayalam_1.png", "64": "https://images.cdn.kukufm.com/w:64/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/malayalam_1.png", "128": "https://images.cdn.kukufm.com/w:128/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/malayalam_1.png", "256": "https://images.cdn.kukufm.com/w:256/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/malayalam_1.png"}, "is_selected": false}, {"id": 2, "title": "English", "title_secondary": "English", "image": "https://images.cdn.kukufm.com/https://kukufm.s3.ap-south-1.amazonaws.com/icons/english_2.png", "slug": "english", "color": "#1EC39A", "uri": "app://kukufm/home-lang/english", "web_uri": "/home-lang/english", "color_info": {"bg_color": "#F8D3DB", "text_color": "#A40023"}, "short_title": "Aa", "svg_icon": "https://d1l07mcd18xic4.cloudfront.net/lang_icons/english.svg", "icon_sizes": {"16": "https://images.cdn.kukufm.com/w:16/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/english_2.png", "32": "https://images.cdn.kukufm.com/w:32/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/english_2.png", "64": "https://images.cdn.kukufm.com/w:64/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/english_2.png", "128": "https://images.cdn.kukufm.com/w:128/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/english_2.png", "256": "https://images.cdn.kukufm.com/w:256/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/english_2.png"}, "is_selected": false}], "is_coin_based_monetization": false, "is_vip_only": false, "navbar_items": [{"label": "Home", "id": "nav_home"}, {"label": "Free Trial", "id": "nav_premium"}, {"label": "Search", "id": "nav_explore"}, {"label": "My Space", "id": "nav_mySpace"}], "navbar_items_v1": [{"label": "Home", "id": "nav_home"}, {"label": "Free Trial", "id": "nav_premium"}, {"label": "Search", "id": "nav_explore"}, {"label": "My Space", "id": "nav_mySpace"}], "experiments": [{"slug": "premium-show-redirection", "url": "app://kukufm/subscription?fromFreeTrial=true"}, {"slug": "home-phase-3", "url": "", "user_set": 2}, {"slug": "hide-duration-and-episode-count-for-vip", "url": ""}, {"slug": "hide-vip-label", "url": ""}, {"slug": "new-show-page"}, {"slug": "skip_show_page_on_reel", "is_skip_show_page": true}]} 
+ </msg>
+<msg time="2025-01-30T11:04:02.754777" level="INFO">C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'kukufm.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-01-30T11:04:02.754777" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>kukufm</arg>
+<arg>url=${CheckForLanguage}</arg>
+<arg>headers=${headers}</arg>
+<arg>data=${data}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-01-30T11:04:02.503545" elapsed="0.251232"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Response Status: ${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-01-30T11:04:02.754777" elapsed="0.000000"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Response Body: ${response.content}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-01-30T11:04:02.754777" elapsed="0.015365"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-01-30T11:04:02.770142" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-01-30T11:04:02.770142" elapsed="0.000000"/>
+</kw>
+<doc>Sends a POST request to the API with necessary headers and data</doc>
+<status status="PASS" start="2025-01-30T11:04:02.503545" elapsed="0.266597"/>
+</test>
+<status status="PASS" start="2025-01-30T11:04:02.503545" elapsed="0.266597"/>
+</suite>
+<suite id="s1-s2" name="UpdateLanguageForTelugu" source="C:\Users\User\PycharmProjects\API\Testcase\Test\UpdateLanguageForTelugu.robot">
+<test id="s1-s2-t1" name="Send API Request To Get Languages" line="12">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-01-30T11:04:02.776364" level="INFO">Creating Session using : alias=kukufm, url=https://kukufm.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>kukufm</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-01-30T11:04:02.776364" elapsed="0.000000"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-01-30T11:04:02.776364" level="INFO">${headers} = {'Authorization': 'jwt eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMTQ5MTQxMzAsImV4cCI6MTczOTQ3MTQwMH0._cfHZqPo2mkvSrjensmEgzvlvjAYfK-8sXv1AHRcs_VE5EVqxefGRPIAOqwtkW3XvVzD8ZJENglNu92BcNPxQw',...</msg>
+<var>${headers}</var>
+<arg>Authorization=${Authorization}</arg>
+<arg>package-name=${PACKAGE_NAME}</arg>
+<arg>Content-Type=application/x-www-form-urlencoded</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-01-30T11:04:02.776364" elapsed="0.000000"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-01-30T11:04:02.776364" level="INFO">${data} = {'language_ids': '3'}</msg>
+<var>${data}</var>
+<arg>language_ids=${TELUGU_LANGUAGE_ID}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-01-30T11:04:02.776364" elapsed="0.000000"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-01-30T11:04:02.980288" level="INFO">POST Request : url=https://kukufm.com/api/v1/users/114691457/languages/ 
+ path_url=/api/v1/users/114691457/languages/ 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'jwt eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMTQ5MTQxMzAsImV4cCI6MTczOTQ3MTQwMH0._cfHZqPo2mkvSrjensmEgzvlvjAYfK-8sXv1AHRcs_VE5EVqxefGRPIAOqwtkW3XvVzD8ZJENglNu92BcNPxQw', 'package-name': 'com.vlv.aravali', 'Content-Type': 'application/x-www-form-urlencoded', 'Content-Length': '14'} 
+ body=language_ids=3 
+ </msg>
+<msg time="2025-01-30T11:04:02.980288" level="INFO">POST Response : url=https://kukufm.com/api/v1/users/114691457/languages/ 
+ status=200, reason=OK 
+ headers={'Date': 'Thu, 30 Jan 2025 05:34:03 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Set-Cookie': 'AWSALBTG=I5NUr/tbZtgHxM/H7zTgdCPKBO9l4YdS18wsEoWZmMmiXvXqAbKArsrQFYZtIT5eQyN761FVBzcJC9Q8k+RxoBvikLU4JUv8uTYcralFHdRoy8wdrSvq0kOFukuGNf/Z1RJ5KsH7Z8SbtHUA2OdmiIOPyCCL/I9O4a3tMhE2tV0z; Expires=Thu, 06 Feb 2025 05:34:03 GMT; Path=/, AWSALBTGCORS=I5NUr/tbZtgHxM/H7zTgdCPKBO9l4YdS18wsEoWZmMmiXvXqAbKArsrQFYZtIT5eQyN761FVBzcJC9Q8k+RxoBvikLU4JUv8uTYcralFHdRoy8wdrSvq0kOFukuGNf/Z1RJ5KsH7Z8SbtHUA2OdmiIOPyCCL/I9O4a3tMhE2tV0z; Expires=Thu, 06 Feb 2025 05:34:03 GMT; Path=/; SameSite=None; Secure, AWSALB=Gk+NOw+wKRF9TaKhIXdB4LOJq5Gy+wznm8F3yxCC8cr1fT8x1w03fcdOgz1gXrF+SvOvmsHcOJtIbUSF1eegp6pRvYuydrFSr5JmhSCwV4gOmRZ1oxdwF8XLTKKn; Expires=Thu, 06 Feb 2025 05:34:03 GMT; Path=/, AWSALBCORS=Gk+NOw+wKRF9TaKhIXdB4LOJq5Gy+wznm8F3yxCC8cr1fT8x1w03fcdOgz1gXrF+SvOvmsHcOJtIbUSF1eegp6pRvYuydrFSr5JmhSCwV4gOmRZ1oxdwF8XLTKKn; Expires=Thu, 06 Feb 2025 05:34:03 GMT; Path=/; SameSite=None; Secure', 'Server': 'nginx/1.18.0 (Ubuntu)', 'Vary': 'Accept-Encoding', 'X-Frame-Options': 'DENY', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'same-origin', 'Cross-Origin-Opener-Policy': 'same-origin', 'Content-Encoding': 'gzip'} 
+ body={"languages": [{"id": 1, "title": "\u0939\u093f\u0902\u0926\u0940", "title_secondary": "Hindi", "image": "https://images.cdn.kukufm.com/https://kukufm.s3.ap-south-1.amazonaws.com/icons/hindi_1.png", "slug": "hindi", "color": "#FD6233", "uri": "app://kukufm/home-lang/hindi", "web_uri": "/home-lang/hindi", "color_info": {"bg_color": "#F8EBD0", "text_color": "#A16400"}, "short_title": "\u0939", "svg_icon": "https://d1l07mcd18xic4.cloudfront.net/lang_icons/hindi.svg", "icon_sizes": {"16": "https://images.cdn.kukufm.com/w:16/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/hindi_1.png", "32": "https://images.cdn.kukufm.com/w:32/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/hindi_1.png", "64": "https://images.cdn.kukufm.com/w:64/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/hindi_1.png", "128": "https://images.cdn.kukufm.com/w:128/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/hindi_1.png", "256": "https://images.cdn.kukufm.com/w:256/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/hindi_1.png"}, "is_selected": false}, {"id": 8, "title": "\u0ba4\u0bae\u0bbf\u0bb4\u0bcd", "title_secondary": "Tamil", "image": "https://images.cdn.kukufm.com/https://kukufm.s3.ap-south-1.amazonaws.com/icons/tamil_2.png", "slug": "tamil", "color": "#282E34", "uri": "app://kukufm/home-lang/tamil", "web_uri": "/home-lang/tamil", "color_info": {"bg_color": "#EBCEF5", "text_color": "#671584"}, "short_title": "\u0ba4", "svg_icon": "https://d1l07mcd18xic4.cloudfront.net/lang_icons/tamil.svg", "icon_sizes": {"16": "https://images.cdn.kukufm.com/w:16/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/tamil_2.png", "32": "https://images.cdn.kukufm.com/w:32/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/tamil_2.png", "64": "https://images.cdn.kukufm.com/w:64/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/tamil_2.png", "128": "https://images.cdn.kukufm.com/w:128/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/tamil_2.png", "256": "https://images.cdn.kukufm.com/w:256/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/tamil_2.png"}, "is_selected": false}, {"id": 4, "title": "\u092e\u0930\u093e\u0920\u0940", "title_secondary": "Marathi", "image": "https://images.cdn.kukufm.com/https://kukufm.s3.ap-south-1.amazonaws.com/icons/marathi_1.png", "slug": "marathi", "color": "#349DD5", "uri": "app://kukufm/home-lang/marathi", "web_uri": "/home-lang/marathi", "color_info": {"bg_color": "#BAF0E4", "text_color": "#007A49"}, "short_title": "\u092e", "svg_icon": "https://d1l07mcd18xic4.cloudfront.net/lang_icons/marathi.svg", "icon_sizes": {"16": "https://images.cdn.kukufm.com/w:16/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/marathi_1.png", "32": "https://images.cdn.kukufm.com/w:32/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/marathi_1.png", "64": "https://images.cdn.kukufm.com/w:64/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/marathi_1.png", "128": "https://images.cdn.kukufm.com/w:128/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/marathi_1.png", "256": "https://images.cdn.kukufm.com/w:256/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/marathi_1.png"}, "is_selected": false}, {"id": 5, "title": "\u09ac\u09be\u0982\u09b2\u09be", "title_secondary": "Bangla", "image": "https://images.cdn.kukufm.com/https://kukufm.s3.ap-south-1.amazonaws.com/icons/bangla_1.png", "slug": "bengali", "color": "#4F55C8", "uri": "app://kukufm/home-lang/bengali", "web_uri": "/home-lang/bengali", "color_info": {"bg_color": "#F3C5F7", "text_color": "#8A00BE"}, "short_title": "\u09ac\u09be", "svg_icon": "https://d1l07mcd18xic4.cloudfront.net/lang_icons/bengali.svg", "icon_sizes": {"16": "https://images.cdn.kukufm.com/w:16/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/bangla_1.png", "32": "https://images.cdn.kukufm.com/w:32/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/bangla_1.png", "64": "https://images.cdn.kukufm.com/w:64/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/bangla_1.png", "128": "https://images.cdn.kukufm.com/w:128/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/bangla_1.png", "256": "https://images.cdn.kukufm.com/w:256/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/bangla_1.png"}, "is_selected": false}, {"id": 3, "title": "\u0c24\u0c46\u0c32\u0c41\u0c17\u0c41", "title_secondary": "Telugu", "image": "https://images.cdn.kukufm.com/https://kukufm.s3.ap-south-1.amazonaws.com/icons/telugu_1.png", "slug": "telugu", "color": "#0089B5", "uri": "app://kukufm/home-lang/telugu", "web_uri": "/home-lang/telugu", "color_info": {"bg_color": "#DCF7BD", "text_color": "#0350AA"}, "short_title": "\u0c24", "svg_icon": "https://d1l07mcd18xic4.cloudfront.net/lang_icons/telugu.svg", "icon_sizes": {"16": "https://images.cdn.kukufm.com/w:16/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/telugu_1.png", "32": "https://images.cdn.kukufm.com/w:32/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/telugu_1.png", "64": "https://images.cdn.kukufm.com/w:64/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/telugu_1.png", "128": "https://images.cdn.kukufm.com/w:128/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/telugu_1.png", "256": "https://images.cdn.kukufm.com/w:256/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/telugu_1.png"}, "is_selected": true}, {"id": 13, "title": "\u0c95\u0ca8\u0ccd\u0ca8\u0ca1", "title_secondary": "Kannada", "image": "https://images.cdn.kukufm.com/https://kukufm.s3.ap-south-1.amazonaws.com/icons/kannada_1.png", "slug": "kannada", "color": null, "uri": "app://kukufm/home-lang/kannada", "web_uri": "/home-lang/kannada", "color_info": {"bg_color": "#F9F2E1", "text_color": "#A2890B"}, "short_title": "\u0c95", "svg_icon": "https://d1l07mcd18xic4.cloudfront.net/lang_icons/kannada.svg", "icon_sizes": {"16": "https://images.cdn.kukufm.com/w:16/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/kannada_1.png", "32": "https://images.cdn.kukufm.com/w:32/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/kannada_1.png", "64": "https://images.cdn.kukufm.com/w:64/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/kannada_1.png", "128": "https://images.cdn.kukufm.com/w:128/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/kannada_1.png", "256": "https://images.cdn.kukufm.com/w:256/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/kannada_1.png"}, "is_selected": false}, {"id": 9, "title": "\u0d2e\u0d32\u0d2f\u0d3e\u0d33\u0d02", "title_secondary": "Malayalam", "image": "https://images.cdn.kukufm.com/https://kukufm.s3.ap-south-1.amazonaws.com/icons/malayalam_1.png", "slug": "malayalam", "color": "#282E34", "uri": "app://kukufm/home-lang/malayalam", "web_uri": "/home-lang/malayalam", "color_info": {"bg_color": "#D4D5E3", "text_color": "#3239D5"}, "short_title": "\u0d33", "svg_icon": "https://d1l07mcd18xic4.cloudfront.net/lang_icons/malayalam.svg", "icon_sizes": {"16": "https://images.cdn.kukufm.com/w:16/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/malayalam_1.png", "32": "https://images.cdn.kukufm.com/w:32/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/malayalam_1.png", "64": "https://images.cdn.kukufm.com/w:64/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/malayalam_1.png", "128": "https://images.cdn.kukufm.com/w:128/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/malayalam_1.png", "256": "https://images.cdn.kukufm.com/w:256/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/malayalam_1.png"}, "is_selected": false}, {"id": 2, "title": "English", "title_secondary": "English", "image": "https://images.cdn.kukufm.com/https://kukufm.s3.ap-south-1.amazonaws.com/icons/english_2.png", "slug": "english", "color": "#1EC39A", "uri": "app://kukufm/home-lang/english", "web_uri": "/home-lang/english", "color_info": {"bg_color": "#F8D3DB", "text_color": "#A40023"}, "short_title": "Aa", "svg_icon": "https://d1l07mcd18xic4.cloudfront.net/lang_icons/english.svg", "icon_sizes": {"16": "https://images.cdn.kukufm.com/w:16/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/english_2.png", "32": "https://images.cdn.kukufm.com/w:32/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/english_2.png", "64": "https://images.cdn.kukufm.com/w:64/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/english_2.png", "128": "https://images.cdn.kukufm.com/w:128/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/english_2.png", "256": "https://images.cdn.kukufm.com/w:256/q:85/https://kukufm.s3.ap-south-1.amazonaws.com/icons/english_2.png"}, "is_selected": false}], "is_coin_based_monetization": false, "is_vip_only": false, "navbar_items": [{"label": "Home", "id": "nav_home"}, {"label": "Free Trial", "id": "nav_premium"}, {"label": "Search", "id": "nav_explore"}, {"label": "My Space", "id": "nav_mySpace"}], "navbar_items_v1": [{"label": "Home", "id": "nav_home"}, {"label": "Free Trial", "id": "nav_premium"}, {"label": "Search", "id": "nav_explore"}, {"label": "My Space", "id": "nav_mySpace"}], "experiments": [{"slug": "premium-show-redirection", "url": "app://kukufm/subscription?fromFreeTrial=true"}, {"slug": "home-phase-3", "url": "", "user_set": 2}, {"slug": "hide-duration-and-episode-count-for-vip", "url": ""}, {"slug": "hide-vip-label", "url": ""}, {"slug": "new-show-page"}, {"slug": "skip_show_page_on_reel", "is_skip_show_page": true}]} 
+ </msg>
+<msg time="2025-01-30T11:04:02.980288" level="INFO">C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'kukufm.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-01-30T11:04:02.980288" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>kukufm</arg>
+<arg>url=${CheckForLanguage}</arg>
+<arg>headers=${headers}</arg>
+<arg>data=${data}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-01-30T11:04:02.776364" elapsed="0.203924"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Response Status: ${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-01-30T11:04:02.980288" elapsed="0.000000"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Response Body: ${response.content}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-01-30T11:04:02.980288" elapsed="0.015510"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-01-30T11:04:02.995798" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-01-30T11:04:02.995798" elapsed="0.000000"/>
+</kw>
+<doc>Sends a POST request to the API with necessary headers and data</doc>
+<status status="PASS" start="2025-01-30T11:04:02.776364" elapsed="0.219434"/>
+</test>
+<status status="PASS" start="2025-01-30T11:04:02.770142" elapsed="0.225656"/>
+</suite>
+<status status="PASS" start="2025-01-30T11:04:00.599712" elapsed="2.396086"/>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Test" id="s1" pass="2" fail="0" skip="0">Test</stat>
+<stat name="UpdateLanguageForHindi" id="s1-s1" pass="1" fail="0" skip="0">Test.UpdateLanguageForHindi</stat>
+<stat name="UpdateLanguageForTelugu" id="s1-s2" pass="1" fail="0" skip="0">Test.UpdateLanguageForTelugu</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

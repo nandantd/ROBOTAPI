@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.2 (Python 3.12.7 on win32)" generated="2025-01-30T11:26:14.190989" rpa="false" schemaversion="5">
+<suite id="s1" name="UpdateLanguageForHindi" source="C:\Users\User\PycharmProjects\API\Testcase\Test\UpdateLanguageForHindi.robot">
+<test id="s1-t1" name=" [Tags]" line="11">
+<kw name="smoke">
+<msg time="2025-01-30T11:26:14.616539" level="FAIL">No keyword with name 'smoke' found.</msg>
+<status status="FAIL" start="2025-01-30T11:26:14.616539" elapsed="0.000000">No keyword with name 'smoke' found.</status>
+</kw>
+<status status="FAIL" start="2025-01-30T11:26:14.615541" elapsed="0.001995">No keyword with name 'smoke' found.</status>
+</test>
+<test id="s1-t2" name="Update Language" line="12">
+<kw name="Send API Request To Update Languages" owner="Base">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-01-30T11:26:14.619216" level="INFO">Creating Session using : alias=kukufm, url=https://kukufm.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>kukufm</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-01-30T11:26:14.619216" elapsed="0.000000"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-01-30T11:26:14.619216" level="INFO">${headers} = {'Authorization': '', 'package-name': 'com.vlv.aravali', 'Content-Type': 'application/x-www-form-urlencoded'}</msg>
+<var>${headers}</var>
+<arg>Authorization=${Authorization}</arg>
+<arg>package-name=${PACKAGE_NAME}</arg>
+<arg>Content-Type=application/x-www-form-urlencoded</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-01-30T11:26:14.619216" elapsed="0.000000"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-01-30T11:26:14.620212" level="INFO">${data} = {'language_ids': '{1'}</msg>
+<var>${data}</var>
+<arg>language_ids=${HINDI_LANGUAGE_ID}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-01-30T11:26:14.619216" elapsed="0.000996"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-01-30T11:26:14.745813" level="INFO">POST Request : url=https://kukufm.com/api/v1/users/114691457/languages/ 
+ path_url=/api/v1/users/114691457/languages/ 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': '', 'package-name': 'com.vlv.aravali', 'Content-Type': 'application/x-www-form-urlencoded', 'Content-Length': '17'} 
+ body=language_ids=%7B1 
+ </msg>
+<msg time="2025-01-30T11:26:14.745813" level="INFO">POST Response : url=https://kukufm.com/api/v1/users/114691457/languages/ 
+ status=401, reason=Unauthorized 
+ headers={'Date': 'Thu, 30 Jan 2025 05:56:15 GMT', 'Content-Type': 'application/json', 'Content-Length': '92', 'Connection': 'keep-alive', 'Set-Cookie': 'AWSALBTG=xMTDug/wgi+xnDJkgBqhYI7/P+VeIsjrVM0jYgyWJ3RFAUsea3Wts3TYAIl//e/w6WLuUVEat9Kzgtaj+EcJ9SiauewwRC4ik+afXIEne7Sm7JNd4fhJpOB3rmYvMz860bByaa08S0hRUoEiqobPwoiNUuwVaabcFZtvNSWNw5PJ; Expires=Thu, 06 Feb 2025 05:56:15 GMT; Path=/, AWSALBTGCORS=xMTDug/wgi+xnDJkgBqhYI7/P+VeIsjrVM0jYgyWJ3RFAUsea3Wts3TYAIl//e/w6WLuUVEat9Kzgtaj+EcJ9SiauewwRC4ik+afXIEne7Sm7JNd4fhJpOB3rmYvMz860bByaa08S0hRUoEiqobPwoiNUuwVaabcFZtvNSWNw5PJ; Expires=Thu, 06 Feb 2025 05:56:15 GMT; Path=/; SameSite=None; Secure, AWSALB=yG9EbfU8Pa2EE2qrcNRPymYdXZrvTBZh1S7yY004tOw3+NACdNSeVa84YScqywfffHGEAlXHr3JbLGLg6uCydJ9HZTz3vAp7P7tLSUPzzXHc5FIdQdU84i9cztXe; Expires=Thu, 06 Feb 2025 05:56:15 GMT; Path=/, AWSALBCORS=yG9EbfU8Pa2EE2qrcNRPymYdXZrvTBZh1S7yY004tOw3+NACdNSeVa84YScqywfffHGEAlXHr3JbLGLg6uCydJ9HZTz3vAp7P7tLSUPzzXHc5FIdQdU84i9cztXe; Expires=Thu, 06 Feb 2025 05:56:15 GMT; Path=/; SameSite=None; Secure', 'Server': 'nginx/1.18.0 (Ubuntu)', 'X-Frame-Options': 'DENY', 'Vary': 'Cookie', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'same-origin', 'Cross-Origin-Opener-Policy': 'same-origin'} 
+ body={"status": "error", "status_code": 401, "message": "Login required to access this resource"} 
+ </msg>
+<msg time="2025-01-30T11:26:14.746730" level="INFO">C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'kukufm.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-01-30T11:26:14.746730" level="FAIL">HTTPError: 401 Client Error: Unauthorized for url: https://kukufm.com/api/v1/users/114691457/languages/</msg>
+<var>${response}</var>
+<arg>kukufm</arg>
+<arg>url=${CheckForLanguage}</arg>
+<arg>headers=${headers}</arg>
+<arg>data=${data}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="FAIL" start="2025-01-30T11:26:14.620212" elapsed="0.165959">HTTPError: 401 Client Error: Unauthorized for url: https://kukufm.com/api/v1/users/114691457/languages/</status>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Response Status: ${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-01-30T11:26:14.786171" elapsed="0.000000"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Response Body: ${response.content}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-01-30T11:26:14.786171" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-01-30T11:26:14.786171" elapsed="0.000000"/>
+</kw>
+<arg>{${HINDI_LANGUAGE_ID}</arg>
+<doc>Sends a POST request to the API with necessary headers and data</doc>
+<status status="FAIL" start="2025-01-30T11:26:14.619216" elapsed="0.166955">HTTPError: 401 Client Error: Unauthorized for url: https://kukufm.com/api/v1/users/114691457/languages/</status>
+</kw>
+<status status="FAIL" start="2025-01-30T11:26:14.618216" elapsed="0.168995">HTTPError: 401 Client Error: Unauthorized for url: https://kukufm.com/api/v1/users/114691457/languages/</status>
+</test>
+<status status="FAIL" start="2025-01-30T11:26:14.192985" elapsed="0.595179"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="2" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="UpdateLanguageForHindi" id="s1" pass="0" fail="2" skip="0">UpdateLanguageForHindi</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
